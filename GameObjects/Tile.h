@@ -7,15 +7,6 @@
 
 #include "IDrawable.h"
 
-enum Type {
-    PLAYER,
-    PATH,
-    WALL,
-    GIFT,
-    BOMB,
-    FINISH
-};
-
 class Tile : public IDrawable {
 public:
     Tile(Type);

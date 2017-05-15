@@ -1,10 +1,18 @@
-#include <iostream>
-
+#include <thread>
 #include "GameObjects/Maze.h"
 #include "GameObjects/Pacman.h"
+#include "GameObjects/Monster.h"
 
 Maze maze;
 Pacman pacman;
+
+std::vector<Monster> monsters = {
+        Monster(maze.getMap(), 1, MAZEWIDTH - 2),
+        Monster(maze.getMap(), 20, 1),
+        Monster(maze.getMap(), 15, 15),
+        Monster(maze.getMap(), 7, 15)
+};
+
 
 void display();
 
@@ -13,6 +21,8 @@ void idle();
 void keyboard(unsigned char key, int x, int y);
 
 void special(int key, int x, int y);
+
+void move_monsters();
 
 int main(int argc, char *argv[]) {
 
@@ -31,9 +41,22 @@ int main(int argc, char *argv[]) {
     glutIdleFunc(idle);
     glutSpecialFunc(special);
     glutKeyboardFunc(keyboard);
+
+    std::thread monsters_thread(move_monsters);
+    monsters_thread.detach();
+
     glutMainLoop();
 
     return 0;
+}
+
+void move_monsters() {
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(250));
+        for (int i = 0; i < monsters.size(); i++) {
+            monsters[i].move(maze.getMap());
+        }
+    }
 }
 
 void display() {
@@ -41,6 +64,9 @@ void display() {
 
     maze.draw(0, 0);
     pacman.draw(0, 0);
+    for (int i = 0; i < monsters.size(); i++) {
+        monsters[i].draw(0, 0);
+    }
 
     glFlush();
 }

@@ -1,17 +1,20 @@
 //
-// Created by amr on 5/14/17.
+// Created by amr on 5/15/17.
 //
 
-#ifndef PACGL_PACMAN_H
-#define PACGL_PACMAN_H
+#ifndef PACGL_MONSTER_H
+#define PACGL_MONSTER_H
 
-#include <iostream>
+#include <time.h>
+#include <random>
 #include "IMoveable.h"
 #include "Tile.h"
 
-class Pacman : public Tile, public IMoveable {
+class Monster : public Tile {
 public:
-    Pacman();
+    Monster(Type **, int, int);
+
+    void move(Type **);
 
     void goUp(Type **);
 
@@ -23,11 +26,8 @@ public:
 
     void draw(int, int);
 
-    int getLives();
-
-    int getScore();
-
 private:
+
     bool canGoUp(Type **);
 
     bool canGoDown(Type **);
@@ -40,9 +40,12 @@ private:
 
     void update(Type **);
 
-    int score;
-    int lives;
+    Type last_cell, going_cell;
+
+    std::default_random_engine generator;
+
+
 };
 
 
-#endif //PACGL_PACMAN_H
+#endif //PACGL_MONSTER_H

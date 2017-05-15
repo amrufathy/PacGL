@@ -27,6 +27,8 @@ void Tile::draw(int x, int y) {
         glColor3f(0.0, 1.0, 0.0); // green
     } else if (this->type == PLAYER) {
         glColor3f(0.0, 0.0, 1.0); // blue
+    } else if (this->type == MONSTER) {
+        glColor3f(1.0, 0.0, 0.5); // fuschia
     }
 
     int x_to_draw = y * TILEWIDTH;

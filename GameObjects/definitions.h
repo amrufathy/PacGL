@@ -5,13 +5,29 @@
 #ifndef PACGL_DEFINITIONS_H
 #define PACGL_DEFINITIONS_H
 
-#define MAZEWIDTH 6
-#define MAZEHEIGHT 6
+#ifndef GLUT
+#define GLUT
+
+#include <GL/glut.h>
+
+#endif
+
+#define MAZEWIDTH 31
+#define MAZEHEIGHT 23
 
 #define TILEHEIGHT 20
 #define TILEWIDTH 20
 
 #define PACMAN_START_X 1
-#define PACMAN_START_Y 0
+#define PACMAN_START_Y 1
+
+enum Type {
+    PLAYER,
+    PATH,
+    WALL,
+    GIFT,
+    BOMB,
+    MONSTER
+};
 
 #endif //PACGL_DEFINITIONS_H

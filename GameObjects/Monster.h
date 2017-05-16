@@ -9,7 +9,11 @@
 #include <random>
 #include "IMoveable.h"
 #include "Tile.h"
+
+using namespace std;
+
 #include "Pacman.h"
+
 
 class Monster : public Tile, public IMoveable {
 public:
@@ -37,9 +41,15 @@ private:
 
     bool canGoRight(Type **);
 
+    void moveToClosestCell(Type **);
+
+    void moveRandomly(Type **maze);
+
     bool canGoToCell(Type);
 
     void update(Type **);
+
+    int getDistance(int, int, int, int);
 
     Type last_cell, going_cell;
 

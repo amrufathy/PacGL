@@ -7,8 +7,7 @@
 
 #ifndef GLUT
 #define GLUT
-
-#include <GL/glut.h>
+#include <GLUT/glut.h>
 
 #endif
 
@@ -28,6 +27,13 @@ enum Type {
     GIFT,
     BOMB,
     MONSTER
+};
+
+enum Direction {
+    UP,
+    RIGHT,
+    LEFT,
+    DOWN
 };
 
 #endif //PACGL_DEFINITIONS_H

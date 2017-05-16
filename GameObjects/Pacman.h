@@ -27,6 +27,10 @@ public:
 
     int getScore();
 
+    int getX();
+
+    int getY();
+
     void setLives(int);
 
 private:

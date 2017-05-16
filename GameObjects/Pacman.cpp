@@ -105,6 +105,14 @@ int Pacman::getScore() {
     return this->score;
 }
 
+int Pacman::getX() {
+    return this->x;
+}
+
+int Pacman::getY() {
+    return this->y;
+}
+
 void Pacman::setLives(int lives) {
     this->lives = lives;
 }

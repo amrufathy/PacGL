@@ -27,27 +27,29 @@ void Monster::moveToClosestCell(Type **maze) {
     Direction min_direction;
     int distance;
     //get minimum direction
+    int current_x = this->x;
+    int current_y = this->y;
     //left
-    distance = this->getDistance(this->x, this->y, this->x, --this->y);
+    distance = this->getDistance(this->player->getX(), this->player->getY(), current_x, --current_y);
     if (min_distance > distance) {
         min_distance = distance;
         min_direction = LEFT;
     }
     //right
-    distance = this->getDistance(this->x, this->y, this->x, --this->y);
-    if (min_distance > getDistance(this->x, this->y, this->x, ++this->y)) {
+    distance = this->getDistance(this->player->getX(), this->player->getY(), current_x, ++current_y);
+    if (min_distance > distance) {
         min_distance = distance;
         min_direction = RIGHT;
     }
     //down
-    distance = this->getDistance(this->x, this->y, ++this->x, this->y);
+    distance = this->getDistance(this->player->getX(), this->player->getY(), ++current_x, current_y);
     if (min_distance > distance) {
         min_distance = distance;
 
         min_direction = DOWN;
     }
     //up
-    distance = this->getDistance(this->x, this->y, --this->x, this->y);
+    distance = this->getDistance(this->player->getX(), this->player->getY(), --current_x, current_y);
     if (min_distance > distance) {
         min_direction = UP;
     }
@@ -118,7 +120,6 @@ bool Monster::canGoDown(Type **maze) {
     }
     return false;
 }
-
 
 
 void Monster::goDown(Type **maze) {

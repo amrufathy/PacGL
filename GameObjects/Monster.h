@@ -9,15 +9,15 @@
 #include <random>
 #include "IMoveable.h"
 #include "Tile.h"
-#include <queue>
-#include <iostream>
-#include <unordered_map>
 
 using namespace std;
 
-class Monster : public Tile {
+#include "Pacman.h"
+
+
+class Monster : public Tile, public IMoveable {
 public:
-    Monster(Type **, int, int);
+    Monster(Type **, Pacman *, int, int);
 
     void move(Type **);
 
@@ -55,7 +55,7 @@ private:
 
     std::default_random_engine generator;
 
-
+    Pacman *player;
 };
 
 

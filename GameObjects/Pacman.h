@@ -27,6 +27,8 @@ public:
 
     int getScore();
 
+    void setLives(int);
+
 private:
     bool canGoUp(Type **);
 

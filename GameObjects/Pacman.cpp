@@ -88,16 +88,9 @@ void Pacman::goRight(Type **maze) {
 void Pacman::update(Type **maze) {
     if (maze[this->x][this->y] == GIFT) {
         this->score++;
-        printf("Lives: %d\n", this->getLives());
-        printf("Score: %d\n", this->getScore());
-    }
-    else if (maze[this->x][this->y] == BOMB) {
+    } else if (maze[this->x][this->y] == BOMB) {
         this->lives--;
-        printf("Lives: %d\n", this->getLives());
-        printf("Score: %d\n", this->getScore());
     }
-
-
 }
 
 void Pacman::draw(int x, int y) {
@@ -110,4 +103,8 @@ int Pacman::getLives() {
 
 int Pacman::getScore() {
     return this->score;
+}
+
+void Pacman::setLives(int lives) {
+    this->lives = lives;
 }

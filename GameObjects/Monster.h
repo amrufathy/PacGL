@@ -9,6 +9,11 @@
 #include <random>
 #include "IMoveable.h"
 #include "Tile.h"
+#include <queue>
+#include <iostream>
+#include <unordered_map>
+
+using namespace std;
 
 class Monster : public Tile {
 public:
@@ -36,9 +41,15 @@ private:
 
     bool canGoRight(Type **);
 
+    void moveToClosestCell(Type **);
+
+    void moveRandomly(Type **maze);
+
     bool canGoToCell(Type);
 
     void update(Type **);
+
+    int getDistance(int, int, int, int);
 
     Type last_cell, going_cell;
 

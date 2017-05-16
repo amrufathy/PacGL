@@ -3,7 +3,7 @@
 //
 
 #include "Monster.h"
-#include <iostream>
+#include <string>
 
 Monster::Monster(Type **maze, int start_x, int start_y) :
         Tile(MONSTER, start_x, start_y) {
@@ -20,7 +20,61 @@ bool Monster::canGoToCell(Type new_cell) {
     return new_cell == PATH || new_cell == GIFT || new_cell == BOMB || new_cell == PLAYER;
 }
 
+
+void Monster::moveToClosestCell(Type **maze) {
+    int min_distance = numeric_limits<int>::max();
+    Direction min_direction;
+    int distance;
+    //get minimum direction
+    //left
+    distance = this->getDistance(this->x, this->y, this->x, --this->y);
+    if (min_distance > distance) {
+        min_distance = distance;
+        min_direction = LEFT;
+    }
+    //right
+    distance = this->getDistance(this->x, this->y, this->x, --this->y);
+    if (min_distance > getDistance(this->x, this->y, this->x, ++this->y)) {
+        min_distance = distance;
+        min_direction = RIGHT;
+    }
+    //down
+    distance = this->getDistance(this->x, this->y, ++this->x, this->y);
+    if (min_distance > distance) {
+        min_distance = distance;
+
+        min_direction = DOWN;
+    }
+    //up
+    distance = this->getDistance(this->x, this->y, --this->x, this->y);
+    if (min_distance > distance) {
+        min_direction = UP;
+    }
+
+    //make move
+    if (min_direction == LEFT && this->canGoLeft(maze)) {
+        this->goLeft(maze);
+    } else if (min_direction == RIGHT && this->canGoRight(maze)) {
+        this->goRight(maze);
+    } else if (min_direction == UP && this->canGoUp(maze)) {
+        this->goUp(maze);
+    } else if (min_direction == DOWN && this->canGoDown(maze)) {
+        this->goDown(maze);
+    } else {
+        this->moveRandomly(maze);
+    }
+
+};
+
+int Monster::getDistance(int from_x, int from_y, int to_x, int to_y) {
+    return (int) sqrt(pow(from_x - to_x, 2) + pow(from_y - to_y, 2));
+}
+
 void Monster::move(Type **maze) {
+    this->moveToClosestCell(maze);
+}
+
+void Monster::moveRandomly(Type **maze) {
     std::uniform_int_distribution<int> distribution(0, 3);
     int random = distribution(generator);
 
@@ -64,6 +118,8 @@ bool Monster::canGoDown(Type **maze) {
     return false;
 }
 
+
+
 void Monster::goDown(Type **maze) {
     if (this->canGoDown(maze)) {
         going_cell = maze[this->x + 1][this->y];
@@ -83,6 +139,7 @@ bool Monster::canGoLeft(Type **maze) {
     }
     return false;
 }
+
 
 void Monster::goLeft(Type **maze) {
     if (this->canGoLeft(maze)) {

@@ -31,8 +31,8 @@ void Tile::draw(int x, int y) {
         glColor3f(1.0, 0.0, 0.5); // fuschia
     }
 
-    int x_to_draw = y * TILEWIDTH;
-    int y_to_draw = TILEHEIGHT * (-1 + MAZEHEIGHT - x);
+    int x_to_draw = (y * TILEWIDTH) + 10 ;
+    int y_to_draw = (TILEHEIGHT * (-1 + MAZEHEIGHT - x)) + 10;
 
     glBegin(GL_QUADS);
 

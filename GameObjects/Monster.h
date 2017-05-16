@@ -9,10 +9,11 @@
 #include <random>
 #include "IMoveable.h"
 #include "Tile.h"
+#include "Pacman.h"
 
-class Monster : public Tile {
+class Monster : public Tile, public IMoveable {
 public:
-    Monster(Type **, int, int);
+    Monster(Type **, Pacman *, int, int);
 
     void move(Type **);
 
@@ -44,7 +45,7 @@ private:
 
     std::default_random_engine generator;
 
-
+    Pacman *player;
 };
 
 

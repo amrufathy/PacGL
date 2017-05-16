@@ -5,11 +5,12 @@
 #include "Monster.h"
 #include <iostream>
 
-Monster::Monster(Type **maze, int start_x, int start_y) :
+Monster::Monster(Type **maze, Pacman *player, int start_x, int start_y) :
         Tile(MONSTER, start_x, start_y) {
 
     maze[this->x][this->y] = MONSTER;
     last_cell = PATH;
+    this->player = player;
 }
 
 void Monster::draw(int x, int y) {
@@ -115,6 +116,8 @@ void Monster::goRight(Type **maze) {
     maze[this->x][this->y] = MONSTER;
 }
 
-void Monster::update(Type **) {
-
+void Monster::update(Type **maze) {
+    if (maze[this->x][this->y] == PLAYER) {
+        this->player->setLives(this->player->getLives() - 1);
+    }
 }

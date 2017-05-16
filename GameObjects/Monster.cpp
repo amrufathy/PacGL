@@ -3,7 +3,6 @@
 //
 
 #include "Monster.h"
-#include <string>
 
 Monster::Monster(Type **maze, Pacman *player, int start_x, int start_y) :
         Tile(MONSTER, start_x, start_y) {
@@ -67,7 +66,7 @@ void Monster::moveToClosestCell(Type **maze) {
         this->moveRandomly(maze);
     }
 
-};
+}
 
 int Monster::getDistance(int from_x, int from_y, int to_x, int to_y) {
     return (int) sqrt(pow(from_x - to_x, 2) + pow(from_y - to_y, 2));

@@ -7,8 +7,16 @@
 
 #ifndef GLUT
 #define GLUT
+
+#ifdef __APPLE__
+
 #include <GLUT/glut.h>
 
+#else
+
+#include <GL/glut.h>
+
+#endif
 #endif
 
 #define MAZEWIDTH 31

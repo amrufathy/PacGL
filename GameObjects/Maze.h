@@ -16,6 +16,8 @@ public:
 
     Type **getMap();
 
+    int gifts_count();
+
 private:
     Type **map;
 };

@@ -14,7 +14,6 @@ std::vector<Monster> monsters = {
         Monster(maze.getMap(), &pacman, 7, 15)
 };
 
-
 void display();
 
 void idle();
@@ -26,6 +25,10 @@ void special(int, int, int);
 void move_monsters();
 
 void text(int, int);
+
+void gameover();
+
+void win();
 
 int main(int argc, char *argv[]) {
 
@@ -59,6 +62,8 @@ void move_monsters() {
         for (int i = 0; i < monsters.size(); i++) {
             monsters[i].move(maze.getMap());
         }
+        gameover();
+        win();
     }
 }
 
@@ -119,8 +124,25 @@ void special(int key, int x, int y) {
             pacman.goLeft(maze.getMap());
             break;
     }
+
+    gameover();
+    win();
 }
 
 void keyboard(unsigned char key, int x, int y) {
 
+}
+
+void gameover() {
+    if (pacman.getLives() <= 0) {
+        printf("Game Over !\n");
+        exit(0);
+    }
+}
+
+void win() {
+    if (maze.gifts_count() <= 0) {
+        printf("You won !\n");
+        exit(0);
+    }
 }
